@@ -1,35 +1,28 @@
-import random
-import turtle
+from turtle import Turtle, Screen
+
+screen = Screen()
+screen.setup(600,600)
+screen.bgcolor("black")
+screen.title("Snake Game")
+screen.tracer(0)
+positions = [(0,0),(-20,0),(-40,0)]
+
+segments = []
+
+for position in positions:
+    t = Turtle(shape='square')
+    t.color('white')
+    t.penup()
+    t.goto(position)
+    segments.append(t)
 
 
+game_on = True
 
-colors = []
-for i in range(10):
-    r = random.random()
-    b = random.random()
-    g = random.random()
-    color = (r,b,g)
-    colors.append(color)
-print(colors)
-
-tim = turtle.Turtle()
-tim.speed("fastest")
-tim.penup()
-tim.hideturtle()
-tim.setheading(222)
-tim.forward(250)
-tim.setheading(0)
-n_dots = 100
-
-for dot in range(1, n_dots + 1):
-    tim.dot(20, random.choice(colors))
-    tim.forward(50)
-    if dot%10 == 0:
-        tim.setheading(90)
-        tim.forward(50)
-        tim.setheading(180)
-        tim.forward(500)
-        tim.setheading(0)
+while game_on:
+    screen.update()
+    for segment in segments:
+        segment.forward(20)
 
 
 
@@ -38,5 +31,5 @@ for dot in range(1, n_dots + 1):
 
 
 
-screen = turtle.Screen()
 screen.exitonclick()
+
