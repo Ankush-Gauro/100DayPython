@@ -54,6 +54,21 @@ def save():
             website_entry.delete(0, tk.END)
             password_entry.delete(0, tk.END)
             website_entry.focus()
+
+def search():
+    web = website_entry.get()
+    try:
+        with open("day30/data.json", "r") as file:
+            data = json.load(file)
+    except FileNotFoundError:
+        tk.messagebox.showinfo(title="Password Manager", message="No Data File Found")
+    else:
+        if web in data:
+            email = data[web]["email"]
+            passkey = data[web]["password"]
+            tk.messagebox.showinfo(title=web, message=f"Email: {email}\nPassword: {passkey}")
+        else:
+            tk.messagebox.showinfo(title="Password Manager", message=f"No details for {web} exists.")
 # ---------------------------- UI SETUP ------------------------------- #
 
 window = tk.Tk()    
@@ -91,8 +106,9 @@ generate_button = tk.Button(text="Generate Password", font=("Arial", 10), comman
 generate_button.grid(column=2, row=3)
 
 add_button = tk.Button(text="Add", font=("Arial", 10), width=40, command=save)
-
 add_button.grid(column=1, row=4, columnspan=2)
 
+search_button = tk.Button(text="Search", font=("Arial",10), width=15, command = search)
+search_button.grid(column=2, row=1)
 
 window.mainloop()
