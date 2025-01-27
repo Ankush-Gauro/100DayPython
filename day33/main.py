@@ -55,6 +55,9 @@ if today in birthdays_dict:
         connection.login(user=my_email, password=password)
         connection.sendmail(from_addr=my_email, to_addrs=birthday_person["email"], msg=f"Subject:Happy Birthday\n\n{contents}")
 
+
+#Run evryday on cloud using pythonanywhere.com
+
 # 4. Send the letter generated in step 3 to that person's email address.
 # HINT 1: Gmail(smtp.gmail.com), Yahoo(smtp.mail.yahoo.com), Hotmail(smtp.live.com), Outlook(smtp-mail.outlook.com)
 # HINT 2: Remember to call .starttls()
