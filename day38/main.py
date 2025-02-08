@@ -1,8 +1,14 @@
 import requests
+from datetime import datetime
+import os
 
-APP_ID = "8fa0ada5"
-API_KEY = "17416f1aa78518b07905bfde83741186"
-API = "https://trackapi.nutritionix.com/v2/natural/exercise"
+APP_ID = os.getenv("APP_ID")
+API_KEY = os.getenv("API_KEY")
+API = os.getenv("API")
+
+SHEETY = os.getenv("SHEETY")
+USERNAME = os.getenv("USERNAME")
+PASSWORD = os.getenv("PASSWORD")
 
 text = input("What exercises did you do today?")
 
@@ -19,4 +25,21 @@ parameters = {
 }
 
 response = requests.post(url=API, json=parameters, headers=headers)
-print(response.json())
+result = response.json()
+
+today_date = datetime.now().strftime("%Y-%m-%d")
+now_time = datetime.now().strftime("%X")
+
+for exercise in result['exercises']:
+    sheet_inputs = {
+        "workout" : {
+            "date" : today_date,
+             "time": now_time,
+             "exercise": exercise['name'].title(),
+             "duration" : exercise['duration_min'],
+             "calories" : exercise['nf_calories']
+        }
+    }
+    sheet_response = requests.post(url=SHEETY, json=sheet_inputs, auth=(USERNAME, PASSWORD))
+
+    print(sheet_response.text)
