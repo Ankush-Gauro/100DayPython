@@ -5,8 +5,8 @@ from requests.auth import HTTPBasicAuth
 from dotenv import load_dotenv
 
 load_dotenv()
-amadeus_api = os.getenv('apadeusApi')
-amadeus_key = os.getenv('amadeusKey')
+
+
 
 SHEETY_GET = "https://api.sheety.co/5cd4f795c01ecc865b2ae32ccd698ea1/copyOfFlightDeals/prices"
 SHEETY_PUT = "https://api.sheety.co/5cd4f795c01ecc865b2ae32ccd698ea1/copyOfFlightDeals/prices/"
