@@ -3,5 +3,6 @@
         "dotenv",
         "iterrows"
     ],
-    "livePreview.defaultPreviewPath": "/day43/5.3 CSS Selectors/index.html"
+    "livePreview.defaultPreviewPath": "/day43/5.3 CSS Selectors/index.html",
+    "CodeGPT.apiKey": "CodeGPT Plus Beta"
 }
