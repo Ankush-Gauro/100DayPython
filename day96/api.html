@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Country Info Explorer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f0f0f0;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin: 10px;
+    }
+    #result {
+      margin-top: 30px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      display: inline-block;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    img {
+      width: 150px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>? Country Info Explorer</h1>
+  <input type="text" id="countryInput" placeholder="Enter country name" />
+  <button onclick="getCountry()">Search</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function getCountry() {
+      const country = document.getElementById("countryInput").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (!country) {
+        resultDiv.innerHTML = "<p>Please enter a country name.</p>";
+        return;
+      }
+
+      try {
+        const res = await fetch(`https://restcountries.com/v3.1/name/${country}`);
+        if (!res.ok) throw new Error("Country not found");
+
+        const data = await res.json();
+        const countryData = data[0];
+
+        resultDiv.innerHTML = `
+          <h2>${countryData.name.common}</h2>
+          <img src="${countryData.flags.svg}" alt="Flag of ${countryData.name.common}">
+          <p><strong>Capital:</strong> ${countryData.capital?.[0] || 'N/A'}</p>
+          <p><strong>Population:</strong> ${countryData.population.toLocaleString()}</p>
+          <p><strong>Region:</strong> ${countryData.region}</p>
+          <p><strong>Languages:</strong> ${Object.values(countryData.languages || {}).join(", ")}</p>
+        `;
+      } catch (error) {
+        resultDiv.innerHTML = `<p>❌ Error: ${error.message}</p>`;
+      }
+    }
+  </script>
+
+</body>
+</html>

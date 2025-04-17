@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete a task</title>
+</head>
+<body>
+    <form method="POST" action="{{ url_for('delete') }}">
+    {{ form.hidden_tag() }}
+    {{ form.delete_name.label }} {{ form.delete_name(size=30) }}<br>
+    {{ form.submit() }}
+    </form>
+
+</body>
+</html>

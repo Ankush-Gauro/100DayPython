@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add a task</title>
+</head>
+<body>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.add_name.label }} {{ form.add_name(size=30) }}<br>
+        {{ form.add_description.label }} {{ form.add_description(size=30) }}<br>
+        {{ form.add_date_due.label }} {{ form.add_date_due(size=30) }}<br>
+        {{ form.submit() }}
+    </form>
+</body>
+</html>
+

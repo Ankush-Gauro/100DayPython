@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>To-do List</title>
+</head>
+<body>
+    <h1>Home Page</h1>
+    <h2>Links</h2>
+    <a href="/add">Add</a>
+    <a href="/delete">Delete</a>
+
+    <h2>To-do List</h2>
+    <ul>
+        {% for task in forms %}
+            <li>
+                <form action="{{ url_for('toggle', task_id=task.id) }}" method="POST" style="display:inline;">
+                    <input type="checkbox" name="is_done" onchange="this.form.submit()" {% if task.is_done %}checked{% endif %}>
+                    {{ task.name }} - {{ task.description }} | Due: {{ task.date_due }} | Created: {{ task.date_start }}
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Colors</title>
+</head>
+<body>
+    <h1>Top 10 Colors</h1>
+    <ul>
+        {% for color in colors %}
+            <li style="color: {{ color }}">{{ color }}</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Upload another image</a>
+</body>
+</html>

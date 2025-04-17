@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Your Cart</title></head>
+<body>
+<h1>Your Cart</h1>
+{% for item in items %}
+    <div>
+        <h3>{{ item.product.name }}</h3>
+        <p>Quantity: {{ item.quantity }}</p>
+        <p>Subtotal: ${{ item.subtotal / 100 }}</p>
+    </div>
+{% endfor %}
+<p>Total: ${{ total / 100 }}</p>
+<a href="{{ url_for('checkout') }}">Proceed to Checkout</a>
+</body>
+</html>
